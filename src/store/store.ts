@@ -1,17 +1,8 @@
-import { create } from "zustand";
+import { configureStore } from "@reduxjs/toolkit";
+import CounterReducer from "./counterReducer";
 
-type StoreValues = {
-  count: number;
-  increment: () => void;
-  decrement: () => void;
-};
+const store = configureStore({
+  reducer: { counter : CounterReducer },
+});
 
-export const useStoreValues = create<StoreValues>((set) => ({
-  count: 0,
-  increment: () => {
-    set((state) => ({ count: state.count + 1 }));
-  },
-  decrement: () => {
-    set((state) => ({ count: state.count - 1 }));
-  },
-}));
+export default store;

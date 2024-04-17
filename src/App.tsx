@@ -1,15 +1,24 @@
-import { useStoreValues } from "./store/store";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { useSelector, useDispatch } from "react-redux";
+import { CounterAction } from "./store/counterReducer";
 function App() {
-  const count = useStoreValues((state) => state.count);
-  const increment = useStoreValues((state) => state.increment);
-  const decrement = useStoreValues((state) => state.decrement);
+  const dispatch = useDispatch();
+  const counter = useSelector((state: any) => state.counter.counter);
+  const incrementHandler = () => {
+    dispatch(CounterAction.increment());
+  };
+  const decrementHandler = () => {
+    dispatch(CounterAction.decrement());
+  };
   return (
-    <main>
-      <p>{count}</p>
+    <main className="counter">
+      <h1>Redux Counter</h1>
+      <div className="value">{counter}</div>
       <div>
-        <button onClick={increment}> increment </button>
-        <button onClick={decrement}> decrement </button>
+        <button onClick={incrementHandler}>Increment</button>
+
+        <button onClick={decrementHandler}>Decrement</button>
       </div>
     </main>
   );
